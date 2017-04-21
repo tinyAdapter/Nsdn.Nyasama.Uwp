@@ -1,2 +1,14 @@
-# Nsdn.Nyasama.Uwp
-Nyasama UWP Application
+# Nyasama UWP
+喵玉殿UWP客户端
+
+## 功能
+1. 基础功能：板块列表，帖子查看
+2. 高级功能：漫画阅读，自动签到
+3. 界面优化：支持RS3 Project NEON设计语言
+
+## 项目计划
+实现基础功能，准备界面优化
+
+## 注意事项
+1. 所需Windows 10最低版本为Anniversary Update(Build 14393)
+2. 项目当前处于功能迭代期，可能存在已知的BUG和UI问题，且在完成功能前尚不考虑修复，请查看代码时多加注意
