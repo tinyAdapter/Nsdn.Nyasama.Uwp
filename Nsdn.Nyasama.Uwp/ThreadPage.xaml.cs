@@ -35,7 +35,7 @@ namespace Nsdn.Nyasama.Uwp
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            _pid = Int32.Parse(e.Parameter.ToString());
+            _pid = Int32.Parse(e.Parameter != null ? e.Parameter.ToString() : "10000");
             ViewModel.GetPosts(_pid);
         }
     }
@@ -60,25 +60,39 @@ namespace Nsdn.Nyasama.Uwp
             if (wv != null)
             {
                 wv.NavigateToString(e.NewValue.ToString());
-                wv.NavigationCompleted += Wv_NavigationCompleted;
+                wv.NavigationCompleted += async (sender, be) =>
+                {
+                    var webView = sender as WebView;
+
+                    int height;
+
+                    // get the total width and height
+                    var heightString = await webView.InvokeScriptAsync("eval", new[] { "document.body.scrollHeight.toString()" });
+
+                    if (!int.TryParse(heightString, out height))
+                    {
+                        throw new Exception("Unable to get page height");
+                    }
+                    // resize the webview to the content
+                    webView.Height = height;
+                };
+                wv.SizeChanged += async (sender, be) =>
+                {
+                    var webView = sender as WebView;
+
+                    int height;
+
+                    // get the total width and height
+                    var heightString = await webView.InvokeScriptAsync("eval", new[] { "document.body.scrollHeight.toString()" });
+
+                    if (!int.TryParse(heightString, out height))
+                    {
+                        throw new Exception("Unable to get page height");
+                    }
+                    // resize the webview to the content
+                    webView.Height = height;
+                };
             }
-        }
-
-        private static async void Wv_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
-        {
-            var webView = sender as WebView;
-
-            int height;
-
-            // get the total width and height
-            var heightString = await webView.InvokeScriptAsync("eval", new[] { "document.body.scrollHeight.toString()" });
-
-            if (!int.TryParse(heightString, out height))
-            {
-                throw new Exception("Unable to get page height");
-            }
-            // resize the webview to the content
-            webView.Height = height;
         }
     }
 }

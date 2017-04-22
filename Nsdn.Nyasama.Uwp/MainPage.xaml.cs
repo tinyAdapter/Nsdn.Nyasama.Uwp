@@ -80,7 +80,7 @@ namespace Nsdn.Nyasama.Uwp
             var items = new List<MenuItem>();
             items.Add(new MenuItem() { Icon = Symbol.Accept, Name = "板块列表", PageType = typeof(ForumPage) });
             items.Add(new MenuItem() { Icon = Symbol.Send, Name = "热门帖子", PageType = typeof(HotThreadPage) });
-            items.Add(new MenuItem() { Icon = Symbol.Shop, Name = "汉化推送", PageType = typeof(HotThreadPage) });
+            items.Add(new MenuItem() { Icon = Symbol.Shop, Name = "汉化推送", PageType = typeof(ThreadPage) });
             return items;
         }
 
