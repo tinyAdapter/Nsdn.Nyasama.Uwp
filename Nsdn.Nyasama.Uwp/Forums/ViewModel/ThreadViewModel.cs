@@ -42,7 +42,7 @@ namespace Nsdn.Nyasama.Uwp.Forums.ViewModel
                      return Network.NYASAMA_URL + match.Value;
                  });
                 //修改Message，使之符合WebView格式
-                post.Message = $"<html><head><style>.quote{{padding-bottom:5px;background:#F9F9F9 url(http://bbs.nyasama.com/static/image/common/icon_quote_s.gif) no-repeat 20px 6px;}}.pl .quote blockquote{{display:inline-block;margin:0;padding:0 65px 5px 0;background:url(http://bbs.nyasama.com/static/image/common/icon_quote_e.gif) no-repeat 100% 100%;line-height:1.6;zoom:1;}}</style></head><body>{post.Message}</body></html>";
+                post.Message = $"<html><head><style>.quote{{padding-bottom:5px;background:#F9F9F9 url(http://bbs.nyasama.com/static/image/common/icon_quote_s.gif) no-repeat 20px 6px;}}.pl .quote blockquote{{display:inline-block;margin:0;padding:0 65px 5px 0;background:url(http://bbs.nyasama.com/static/image/common/icon_quote_e.gif) no-repeat 100% 100%;line-height:1.6;zoom:1;}}</style></head><body><div id=\"d\">{post.Message}</div></body></html>";
                 //获取用户头像链接
                 post.AuthorAvaterLink = Network.GetUserAvatarLink(post.AuthorId);
                 //将Post对象推送到Collection中

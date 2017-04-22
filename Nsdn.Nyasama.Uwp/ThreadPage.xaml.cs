@@ -38,6 +38,22 @@ namespace Nsdn.Nyasama.Uwp
             _pid = Int32.Parse(e.Parameter != null ? e.Parameter.ToString() : "10000");
             ViewModel.GetPosts(_pid);
         }
+
+        private async void ContentWebView_WidthChanged(object sender, SizeChangedEventArgs e)
+        {
+            var webView = sender as WebView;
+
+            // get the total width and height
+            var heightString = await webView.InvokeScriptAsync("eval", new[] { "(document.body.offsetHeight + 11).toString()" });
+            await webView.InvokeScriptAsync("eval", new string[] { "document.body.style.overflow = 'hidden';" });
+
+            if (!int.TryParse(heightString, out int height))
+            {
+                throw new Exception("Unable to get page height");
+            }
+            // resize the webview to the content
+            webView.Height = height;
+        }
     }
 
     public class Untils
@@ -64,28 +80,10 @@ namespace Nsdn.Nyasama.Uwp
                 {
                     var webView = sender as WebView;
 
-                    int height;
-
                     // get the total width and height
-                    var heightString = await webView.InvokeScriptAsync("eval", new[] { "document.body.scrollHeight.toString()" });
+                    var heightString = await webView.InvokeScriptAsync("eval", new[] { "document.body.offsetHeight.toString()" });
 
-                    if (!int.TryParse(heightString, out height))
-                    {
-                        throw new Exception("Unable to get page height");
-                    }
-                    // resize the webview to the content
-                    webView.Height = height;
-                };
-                wv.SizeChanged += async (sender, be) =>
-                {
-                    var webView = sender as WebView;
-
-                    int height;
-
-                    // get the total width and height
-                    var heightString = await webView.InvokeScriptAsync("eval", new[] { "document.body.scrollHeight.toString()" });
-
-                    if (!int.TryParse(heightString, out height))
+                    if (!int.TryParse(heightString, out int height))
                     {
                         throw new Exception("Unable to get page height");
                     }

@@ -24,13 +24,11 @@
                     <Image Source="{x:Bind AuthorAvaterLink}" Width="128" Height="128" Margin="0,16,0,0"/>
                 </StackPanel>
                 <StackPanel Grid.Column="2"/>
-                <WebView Grid.Column="3" 
-                         ScrollViewer.IsHorizontalScrollChainingEnabled="False" ScrollViewer.IsVerticalScrollChainingEnabled="False"
-                         ScrollViewer.VerticalScrollMode="Disabled" 
-                         ScrollViewer.HorizontalScrollMode="Disabled"
-                         ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                             local:Untils.SourceString="{x:Bind Message}"/>
+                <WebView Name="ContentWebView" SizeChanged="ContentWebView_WidthChanged"
+                         ScrollViewer.ZoomMode="Disabled"
+                         local:Untils.SourceString="{x:Bind Message}"
+                         Grid.Column="3" ScrollViewer.VerticalScrollMode="Disabled"
+                         ScrollViewer.HorizontalScrollMode="Disabled"/>
                 <StackPanel Grid.Column="4"/>
             </Grid>
         </DataTemplate>
@@ -39,6 +37,7 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ScrollViewer>
             <StackPanel>
+                <StackPanel x:Name="TpStackPanel"/>
                 <TextBlock x:Name="ThreadTitleTextBlock"/>
                 <ItemsControl x:Name="ThreadsItemsControl" 
                           ItemsSource="{x:Bind ViewModel.Posts}" 
