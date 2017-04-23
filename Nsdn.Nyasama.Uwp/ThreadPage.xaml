@@ -24,9 +24,10 @@
                     <Image Source="{x:Bind AuthorAvaterLink}" Width="128" Height="128" Margin="0,16,0,0"/>
                 </StackPanel>
                 <StackPanel Grid.Column="2"/>
-                <WebView Name="ContentWebView" SizeChanged="ContentWebView_WidthChanged"
+                <WebView Name="ContentWebView" local:Untils.SourceString="{x:Bind Message}"
+                         NavigationCompleted="ContentWebView_NavigationCompleted"   
+                         SizeChanged="ContentWebView_WidthChanged"
                          ScrollViewer.ZoomMode="Disabled"
-                         local:Untils.SourceString="{x:Bind Message}"
                          Grid.Column="3" ScrollViewer.VerticalScrollMode="Disabled"
                          ScrollViewer.HorizontalScrollMode="Disabled"/>
                 <StackPanel Grid.Column="4"/>

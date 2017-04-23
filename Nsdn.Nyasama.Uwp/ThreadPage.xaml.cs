@@ -44,7 +44,23 @@ namespace Nsdn.Nyasama.Uwp
             var webView = sender as WebView;
 
             // get the total width and height
-            var heightString = await webView.InvokeScriptAsync("eval", new[] { "(document.body.offsetHeight + 11).toString()" });
+            var heightString = await webView.InvokeScriptAsync("eval", new[] { "(document.body.clientHeight + 8).toString()" });
+            await webView.InvokeScriptAsync("eval", new string[] { "document.body.style.overflow = 'hidden';" });
+
+            if (!int.TryParse(heightString, out int height))
+            {
+                throw new Exception("Unable to get page height");
+            }
+            // resize the webview to the content
+            webView.Height = height;
+        }
+
+        private async void ContentWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        {
+            var webView = sender as WebView;
+
+            // get the total width and height
+            var heightString = await webView.InvokeScriptAsync("eval", new[] { "(document.body.clientHeight + 8).toString()" });
             await webView.InvokeScriptAsync("eval", new string[] { "document.body.style.overflow = 'hidden';" });
 
             if (!int.TryParse(heightString, out int height))
@@ -76,20 +92,6 @@ namespace Nsdn.Nyasama.Uwp
             if (wv != null)
             {
                 wv.NavigateToString(e.NewValue.ToString());
-                wv.NavigationCompleted += async (sender, be) =>
-                {
-                    var webView = sender as WebView;
-
-                    // get the total width and height
-                    var heightString = await webView.InvokeScriptAsync("eval", new[] { "document.body.offsetHeight.toString()" });
-
-                    if (!int.TryParse(heightString, out int height))
-                    {
-                        throw new Exception("Unable to get page height");
-                    }
-                    // resize the webview to the content
-                    webView.Height = height;
-                };
             }
         }
     }
