@@ -16,7 +16,7 @@ namespace Nsdn.Nyasama.Uwp.Forums.Model
         }
         public int Score { get; set; }
         public string Username { get; set; }
-        public DateTime RatingTime { get; set; }
+        public string RatingTime { get; set; }
         public string Reason { get; set; }
     }
 }

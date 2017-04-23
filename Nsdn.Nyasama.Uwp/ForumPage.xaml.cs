@@ -1,9 +1,11 @@
-﻿using Nsdn.Nyasama.Uwp.Forums.ViewModel;
+﻿using Nsdn.Nyasama.Uwp.Forums.Model;
+using Nsdn.Nyasama.Uwp.Forums.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
@@ -32,6 +34,12 @@ namespace Nsdn.Nyasama.Uwp
             this.ViewModel = new ForumViewModel();
             //获取板块列表
             ViewModel.GetForumIndex();
+        }
+
+        private void ForumIndexListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var item = e.ClickedItem as Forum;
+            Frame.Navigate(typeof(ForumListPage), item.Fid);
         }
     }
 }

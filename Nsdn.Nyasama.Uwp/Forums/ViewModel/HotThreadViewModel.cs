@@ -28,8 +28,6 @@ namespace Nsdn.Nyasama.Uwp.Forums.ViewModel
             JObject hotThreadsJObject = await Network.GetContentJsonAsync(rp);
             //将获得的Json结果转换为列表
             IList<JToken> hotThreadsJTokenList = hotThreadsJObject["Variables"]["data"].Children().ToList();
-            //将Json结果反序列化为ThreadHeader对象
-            IList<ThreadHeader> searchResults = new List<ThreadHeader>();
             foreach (JToken hotThreadJTokenList in hotThreadsJTokenList)
             {
                 string s = hotThreadJTokenList.ToString();

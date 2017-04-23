@@ -97,11 +97,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ForumListPage.xaml.cs">
+      <DependentUpon>ForumListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ForumPage.xaml.cs">
       <DependentUpon>ForumPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forums\Model\Forum.cs" />
     <Compile Include="Forums\Model\Post.cs" />
+    <Compile Include="Forums\ViewModel\ForumListViewModel.cs" />
     <Compile Include="Forums\ViewModel\ForumViewModel.cs" />
     <Compile Include="Forums\ViewModel\ThreadViewModel.cs" />
     <Compile Include="HotThreadPage.xaml.cs">
@@ -184,6 +188,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ForumListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ForumPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

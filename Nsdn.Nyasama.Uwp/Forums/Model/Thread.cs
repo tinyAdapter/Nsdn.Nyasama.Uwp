@@ -11,7 +11,7 @@ namespace Nsdn.Nyasama.Uwp.Forums.Model
         public ThreadHeader Header { get; set; }
         public string Body { get; set; }
         public List<Post> Posts { get; set; }
-        public DateTime DateLine { get; set; }
+        public string DateLine { get; set; }
     }
 
     public class ThreadHeader
@@ -27,7 +27,7 @@ namespace Nsdn.Nyasama.Uwp.Forums.Model
         public string Subject { get; set; }
         public int Attachment { get; set; }
         public int Views { get; set; }
-        public DateTime DateLine { get; set; }
-        public DateTime LastPost { get; set; }
+        public string DateLine { get; set; }
+        public string LastPost { get; set; }
     }
 }

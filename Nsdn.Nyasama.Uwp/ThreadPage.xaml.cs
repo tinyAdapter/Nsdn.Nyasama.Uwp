@@ -37,10 +37,10 @@ namespace Nsdn.Nyasama.Uwp
             this.ViewModel = new ThreadViewModel();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             _pid = Int32.Parse(e.Parameter != null ? e.Parameter.ToString() : "10000");
-            ViewModel.GetPosts(_pid);
+            await ViewModel.GetPosts(_pid);
         }
 
         private async void ContentWebView_WidthChanged(object sender, SizeChangedEventArgs e)

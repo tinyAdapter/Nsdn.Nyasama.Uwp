@@ -14,6 +14,6 @@ namespace Nsdn.Nyasama.Uwp.Forums.Model
         public int Posts { get; set; }
         public int TodayPosts { get; set; }
         public string Description { get; set; }
-        public String Icon { get; set; }
+        public string Icon { get; set; }
     }
 }

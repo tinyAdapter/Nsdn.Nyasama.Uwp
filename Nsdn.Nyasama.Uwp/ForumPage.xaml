@@ -28,10 +28,12 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ListView x:Name="HotThreadListView" 
-                      ItemsSource="{x:Bind ViewModel.ForumIndexes}" 
-                      ItemTemplate="{StaticResource ThreadHeaderTemplate}"
-                      HorizontalAlignment="Stretch" VerticalAlignment="Top">
+        <ListView x:Name="ForumIndexListView"
+                  ItemsSource="{x:Bind ViewModel.ForumIndexes}" 
+                  ItemTemplate="{StaticResource ThreadHeaderTemplate}"
+                  IsItemClickEnabled="True"
+                  ItemClick="ForumIndexListView_ItemClick"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Top">
         </ListView>
     </Grid>
 </Page>
