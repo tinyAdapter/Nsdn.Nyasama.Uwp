@@ -35,14 +35,21 @@ namespace Nsdn.Nyasama.Uwp.Forums.ViewModel
             foreach (JToken postJTokenList in postsJTokenList)
             {
                 Post post = JsonConvert.DeserializeObject<Post>(postJTokenList.ToString());
+                //绑定图片div
+                //Regex regexImage = new Regex("<img src=\\\\\\\"[^(static)]+[^g]*\\.png|<img src=\\\\\\\"[^(static)]+[^g]*\\.jpg", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+                Regex regexImage = new Regex("<img src=\\s*\\\"http", RegexOptions.IgnoreCase);
+                post.Message = regexImage.Replace(post.Message, (match) =>
+                {
+                    return match.Value.Replace("<img src=", "<img class=\"resize\" src=");
+                });
                 //修复表情图HTML格式
-                Regex regex = new Regex(@"static/image/smiley/[^f]*\.gif|static/image/smiley/[^g]*\.jpg", RegexOptions.IgnoreCase | RegexOptions.Multiline);
-                post.Message = regex.Replace(post.Message, (match) =>
+                Regex regexFace = new Regex(@"static/image/smiley/[^f]*\.gif|static/image/smiley/[^g]*\.jpg", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+                post.Message = regexFace.Replace(post.Message, (match) =>
                  {
                      return Network.NYASAMA_URL + match.Value;
                  });
                 //修改Message，使之符合WebView格式
-                post.Message = $"<html><head><style>.quote{{padding-bottom:5px;background:#F9F9F9 url(http://bbs.nyasama.com/static/image/common/icon_quote_s.gif) no-repeat 20px 6px;}}.pl .quote blockquote{{display:inline-block;margin:0;padding:0 65px 5px 0;background:url(http://bbs.nyasama.com/static/image/common/icon_quote_e.gif) no-repeat 100% 100%;line-height:1.6;zoom:1;}}</style></head><body><div id=\"d\">{post.Message}</div></body></html>";
+                post.Message = $"<html><head><style>.resize{{width:100%; height:auto;}}.quote{{padding-bottom:5px;background:#F9F9F9 url(http://bbs.nyasama.com/static/image/common/icon_quote_s.gif) no-repeat 20px 6px;}}.pl .quote blockquote{{display:inline-block;margin:0;padding:0 65px 5px 0;background:url(http://bbs.nyasama.com/static/image/common/icon_quote_e.gif) no-repeat 100% 100%;line-height:1.6;zoom:1;}}</style></head><body>{post.Message}</body></html>";
                 //获取用户头像链接
                 post.AuthorAvaterLink = Network.GetUserAvatarLink(post.AuthorId);
                 //将Post对象推送到Collection中
