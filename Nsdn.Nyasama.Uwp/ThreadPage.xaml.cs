@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
@@ -25,6 +26,9 @@ namespace Nsdn.Nyasama.Uwp
     public sealed partial class ThreadPage : Page
     {
         public ThreadViewModel ViewModel;
+        private bool _isLoading = false;
+        private double _originHeight;
+
         private int _pid { get; set; }
 
         public ThreadPage()
@@ -69,6 +73,27 @@ namespace Nsdn.Nyasama.Uwp
             }
             // resize the webview to the content
             webView.Height = height;
+        }
+
+        private async void ScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            if (RootScrollViewer.VerticalOffset == _originHeight) return;
+            _originHeight = RootScrollViewer.VerticalOffset;
+
+            if (_isLoading) return;
+            if (RootScrollViewer.VerticalOffset <= RootScrollViewer.ScrollableHeight - 200) return;
+
+            _isLoading = true;
+            await Task.Factory.StartNew(async () =>
+            {
+                //调用UI线程添加数据
+                await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                {
+                    // 拼接业务查询URL
+                    await ViewModel.GetPosts(_pid);
+                    _isLoading = false;
+                });
+            });
         }
     }
 

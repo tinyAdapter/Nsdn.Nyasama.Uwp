@@ -36,11 +36,11 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ScrollViewer>
+        <ScrollViewer x:Name="RootScrollViewer" ViewChanged="ScrollViewer_ViewChanged">
             <StackPanel>
                 <StackPanel x:Name="TpStackPanel"/>
                 <TextBlock x:Name="ThreadTitleTextBlock"/>
-                <ItemsControl x:Name="ThreadsItemsControl" 
+                <ItemsControl x:Name="ThreadsItemsControl"
                           ItemsSource="{x:Bind ViewModel.Posts}" 
                           ItemTemplate="{StaticResource ThreadTemplate}"
                             HorizontalAlignment="Stretch">
