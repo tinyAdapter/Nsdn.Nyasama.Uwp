@@ -34,6 +34,7 @@ namespace Nsdn.Nyasama.Uwp
         public ThreadPage()
         {
             this.InitializeComponent();
+            Utilities.Transitions.SetUpPageAnimation(this);
             this.ViewModel = new ThreadViewModel();
         }
 
@@ -86,10 +87,8 @@ namespace Nsdn.Nyasama.Uwp
             _isLoading = true;
             await Task.Factory.StartNew(async () =>
             {
-                //调用UI线程添加数据
                 await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                 {
-                    // 拼接业务查询URL
                     await ViewModel.GetPosts(_pid);
                     _isLoading = false;
                 });

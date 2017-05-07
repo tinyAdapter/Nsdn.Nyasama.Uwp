@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
@@ -34,9 +35,22 @@ namespace Nsdn.Nyasama.Uwp
         public ForumListPage()
         {
             this.InitializeComponent();
+            Utilities.Transitions.SetUpPageAnimation(this);
             ViewModel = new ForumListViewModel();
-            
+            //SetUpPageAnimation();
         }
+
+        //private void SetUpPageAnimation()
+        //{
+        //    TransitionCollection collection = new TransitionCollection();
+        //    NavigationThemeTransition theme = new NavigationThemeTransition();
+
+        //    var info = new ContinuumNavigationTransitionInfo();
+
+        //    theme.DefaultNavigationTransitionInfo = info;
+        //    collection.Add(theme);
+        //    this.Transitions = collection;
+        //}
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {

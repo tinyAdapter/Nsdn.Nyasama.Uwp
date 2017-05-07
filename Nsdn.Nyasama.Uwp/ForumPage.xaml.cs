@@ -31,6 +31,7 @@ namespace Nsdn.Nyasama.Uwp
         public ForumPage()
         {
             this.InitializeComponent();
+            Utilities.Transitions.SetUpPageAnimation(this);
             this.ViewModel = new ForumViewModel();
             //获取板块列表
             ViewModel.GetForumIndex();

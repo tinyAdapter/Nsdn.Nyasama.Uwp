@@ -23,7 +23,8 @@
                     <TextBlock Text="{x:Bind Author}" FontWeight="Bold" Padding="6,6,20,0" HorizontalAlignment="Center"/>
                     <Image Source="{x:Bind AuthorAvaterLink}" Width="128" Height="128" Margin="0,16,0,0"/>
                 </StackPanel>
-                <StackPanel Grid.Column="2"/>
+                <StackPanel Grid.Column="2">
+                </StackPanel>
                 <WebView Name="ContentWebView" local:Untils.SourceString="{x:Bind Message}"
                          NavigationCompleted="ContentWebView_NavigationCompleted"   
                          SizeChanged="ContentWebView_WidthChanged"

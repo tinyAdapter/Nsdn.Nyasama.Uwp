@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using Nsdn.Nyasama.Uwp;
 using Nsdn.Nyasama.Uwp.Forums;
 using Windows.UI.Core;
+using Nsdn.Nyasama.Uwp.Forums.Model;
 
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
@@ -66,30 +67,6 @@ namespace Nsdn.Nyasama.Uwp
                 ((Frame)sender).CanGoBack ?
                 AppViewBackButtonVisibility.Visible :
                 AppViewBackButtonVisibility.Collapsed;
-        }
-    }
-
-    public class MenuItem
-    {
-        public Symbol Icon { get; set; }
-        public string Name { get; set; }
-        public Type PageType { get; set; }
-
-        public static List<MenuItem> GetMainItems()
-        {
-            var items = new List<MenuItem>();
-            items.Add(new MenuItem() { Icon = Symbol.Accept, Name = "板块列表", PageType = typeof(ForumPage) });
-            items.Add(new MenuItem() { Icon = Symbol.Send, Name = "热门帖子", PageType = typeof(HotThreadPage) });
-            items.Add(new MenuItem() { Icon = Symbol.Shop, Name = "汉化推送", PageType = typeof(ForumListPage) });
-            return items;
-        }
-
-        public static List<MenuItem> GetOptionsItems()
-        {
-            var items = new List<MenuItem>();
-            items.Add(new MenuItem() { Icon = Symbol.Setting, Name = "设定", PageType = typeof(HotThreadPage) });
-            items.Add(new MenuItem() { Icon = Symbol.World, Name = "关于", PageType = typeof(HotThreadPage) });
-            return items;
         }
     }
 }

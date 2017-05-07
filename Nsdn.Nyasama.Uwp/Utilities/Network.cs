@@ -41,7 +41,7 @@ namespace Nsdn.Nyasama.Uwp.Utilities
                     return json;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }

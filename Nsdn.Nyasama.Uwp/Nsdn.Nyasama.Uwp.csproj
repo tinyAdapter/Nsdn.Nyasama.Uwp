@@ -19,6 +19,9 @@
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <PackageCertificateKeyFile>Nsdn.Nyasama.Uwp_TemporaryKey.pfx</PackageCertificateKeyFile>
     <PackageCertificateThumbprint>CA93B1D02101D1311A6E466E4BA7B2FE56CD83FC</PackageCertificateThumbprint>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -104,6 +107,7 @@
       <DependentUpon>ForumPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forums\Model\Forum.cs" />
+    <Compile Include="Forums\Model\MenuItem.cs" />
     <Compile Include="Forums\Model\Post.cs" />
     <Compile Include="Forums\ViewModel\ForumListViewModel.cs" />
     <Compile Include="Forums\ViewModel\ForumViewModel.cs" />
@@ -123,6 +127,7 @@
     <Compile Include="Utilities\Network.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\RequestParams.cs" />
+    <Compile Include="Utilities\Transitions.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -140,7 +145,6 @@
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
-    <Content Include="Assets\LargeTile.scale-400.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-125.png" />
     <Content Include="Assets\SmallTile.scale-150.png" />

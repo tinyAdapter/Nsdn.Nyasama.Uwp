@@ -31,6 +31,7 @@ namespace Nsdn.Nyasama.Uwp
         public HotThreadPage()
         {
             this.InitializeComponent();
+            Utilities.Transitions.SetUpPageAnimation(this);
             this.ViewModel = new HotThreadViewModel();
         }
 
