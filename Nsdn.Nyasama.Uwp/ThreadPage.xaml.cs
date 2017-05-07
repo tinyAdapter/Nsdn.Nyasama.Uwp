@@ -40,7 +40,8 @@ namespace Nsdn.Nyasama.Uwp
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            _pid = Int32.Parse(e.Parameter != null ? e.Parameter.ToString() : "10000");
+            _pid = e.Parameter != null ? ((ValueTuple<int, string>)e.Parameter).Item1 : 10000;
+            ThreadTitleTextBlock.Text = ((ValueTuple<int, string>)e.Parameter).Item2;
             await ViewModel.GetPosts(_pid);
         }
 
@@ -85,11 +86,13 @@ namespace Nsdn.Nyasama.Uwp
             if (RootScrollViewer.VerticalOffset <= RootScrollViewer.ScrollableHeight - 200) return;
 
             _isLoading = true;
+            OnLoadingProgressRing.IsActive = true;
             await Task.Factory.StartNew(async () =>
             {
                 await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                 {
                     await ViewModel.GetPosts(_pid);
+                    OnLoadingProgressRing.IsActive = false;
                     _isLoading = false;
                 });
             });

@@ -10,42 +10,56 @@
 
     <Page.Resources>
         <DataTemplate x:Key="ThreadTemplate" x:DataType="model:Post">
-            <Grid Padding="6">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="128"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0"/>
-                <StackPanel Grid.Column="1">
-                    <TextBlock Text="{x:Bind Author}" FontWeight="Bold" Padding="6,6,20,0" HorizontalAlignment="Center"/>
-                    <Image Source="{x:Bind AuthorAvaterLink}" Width="128" Height="128" Margin="0,16,0,0"/>
-                </StackPanel>
-                <StackPanel Grid.Column="2">
-                </StackPanel>
-                <WebView Name="ContentWebView" local:Untils.SourceString="{x:Bind Message}"
+            <StackPanel Orientation="Vertical">
+                <Grid Padding="6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="8"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="8"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="128"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Grid.Row="1"/>
+                    <StackPanel Grid.Column="1" Grid.Row="1">
+                        <TextBlock Text="{x:Bind Author}" FontWeight="Bold" Padding="6,6,20,0" HorizontalAlignment="Center"/>
+                        <Image Source="{x:Bind AuthorAvaterLink}" Width="128" Height="128" Margin="0,16,0,0"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Grid.Row="1">
+                    </StackPanel>
+                    <WebView Name="ContentWebView" local:Untils.SourceString="{x:Bind Message}" Grid.Row="1"
                          NavigationCompleted="ContentWebView_NavigationCompleted"   
                          SizeChanged="ContentWebView_WidthChanged"
                          ScrollViewer.ZoomMode="Disabled"
                          Grid.Column="3" ScrollViewer.VerticalScrollMode="Disabled"
                          ScrollViewer.HorizontalScrollMode="Disabled"/>
-                <StackPanel Grid.Column="4"/>
-            </Grid>
+                    <StackPanel Grid.Column="4" Grid.Row="1"/>
+                </Grid>
+            </StackPanel>
         </DataTemplate>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ScrollViewer x:Name="RootScrollViewer" ViewChanged="ScrollViewer_ViewChanged">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+        <TextBlock Grid.Row="0" x:Name="ThreadTitleTextBlock" Foreground="White" 
+                   Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Bold"
+                   VerticalAlignment="Center" Margin="8,0,0,0"/>
+        <ScrollViewer Grid.Row="1" x:Name="RootScrollViewer" ViewChanged="ScrollViewer_ViewChanged">
             <StackPanel>
-                <StackPanel x:Name="TpStackPanel"/>
-                <TextBlock x:Name="ThreadTitleTextBlock"/>
                 <ItemsControl x:Name="ThreadsItemsControl"
                           ItemsSource="{x:Bind ViewModel.Posts}" 
                           ItemTemplate="{StaticResource ThreadTemplate}"
-                            HorizontalAlignment="Stretch">
+                          HorizontalAlignment="Stretch">
                 </ItemsControl>
+                <ProgressRing x:Name="OnLoadingProgressRing" IsActive="False" Margin="0,32,0,32"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

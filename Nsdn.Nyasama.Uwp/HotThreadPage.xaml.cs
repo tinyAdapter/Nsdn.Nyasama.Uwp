@@ -40,7 +40,7 @@ namespace Nsdn.Nyasama.Uwp
         private void HotThreadListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var item = e.ClickedItem as ThreadHeader;
-            Frame.Navigate(typeof(ThreadPage), item.Tid);
+            Frame.Navigate(typeof(ThreadPage), (tid:item.Tid,title:item.Subject));
         }
     }
 }
